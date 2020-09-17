@@ -16,6 +16,8 @@ module SamlIdp
     attr_accessor :expiry
     attr_accessor :encryption_opts
     attr_accessor :session_expiry
+    attr_accessor :x509_certificate
+    attr_accessor :secret_key
 
     delegate :config, to: :SamlIdp
 
