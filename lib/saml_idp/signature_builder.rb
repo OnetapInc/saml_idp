@@ -2,6 +2,7 @@ require 'builder'
 module SamlIdp
   class SignatureBuilder
     attr_accessor :signed_info_builder
+    attr_accessor :x509_certificate
 
     def initialize(signed_info_builder, cert=nil)
       self.signed_info_builder = signed_info_builder
