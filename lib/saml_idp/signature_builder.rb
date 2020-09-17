@@ -6,7 +6,7 @@ module SamlIdp
 
     def initialize(signed_info_builder, cert=nil)
       self.signed_info_builder = signed_info_builder
-      self.x509_certificate = x509_certificate(cert)
+      @x509_certificate = cert
     end
 
     def raw
@@ -22,8 +22,8 @@ module SamlIdp
       end
     end
 
-    def x509_certificate(cert)
-      (cert || SamlIdp.config.x509_certificate)
+    def x509_certificate
+      (@x509_certificate || SamlIdp.config.x509_certificate)
       .to_s
       .gsub(/-----BEGIN CERTIFICATE-----/,"")
       .gsub(/-----END CERTIFICATE-----/,"")
