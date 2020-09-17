@@ -23,10 +23,11 @@ module SamlIdp
     attr_accessor :digest_value
     attr_accessor :raw_algorithm
 
-    def initialize(reference_id, digest_value, raw_algorithm)
+    def initialize(reference_id, digest_value, raw_algorithm, sec_key=nil)
       self.reference_id = reference_id
       self.digest_value = digest_value
       self.raw_algorithm = raw_algorithm
+      @sec_key = sec_key
     end
 
     def raw
@@ -65,7 +66,7 @@ module SamlIdp
     private :clean_algorithm_name
 
     def secret_key
-      SamlIdp.config.secret_key
+      @sec_key || SamlIdp.config.secret_key
     end
     private :secret_key
 
