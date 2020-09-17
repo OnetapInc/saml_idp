@@ -41,8 +41,8 @@ module SamlIdp
       self.saml_request_id = saml_request_id
       self.saml_acs_url = saml_acs_url
       self.algorithm = algorithm
-      self.secret_key = secret_key(sec_key)
-      self.x509_certificate = x509_certificate(cert)
+      self.secret_key = sec_key || secret_key
+      self.x509_certificate = cert || x509_certificate
       self.authn_context_classref = authn_context_classref
       self.expiry = expiry
       self.encryption_opts = encryption_opts
@@ -53,13 +53,13 @@ module SamlIdp
       @built ||= response_builder.encoded
     end
 
-    def x509_certificate(cert)
-      cert || super
-    end
+    # def x509_certificate(cert)
+    #   cert || super
+    # end
 
-    def secret_key(sec_key)
-      sec_key || super
-    end
+    # def secret_key(sec_key)
+    #   sec_key || super
+    # end
 
     def signed_assertion
       if encryption_opts
