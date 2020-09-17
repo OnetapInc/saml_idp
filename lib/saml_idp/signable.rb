@@ -20,8 +20,8 @@ module SamlIdp
       end
     end
 
-    def sign(el)
-      el << signature if sign?
+    def sign(el, cert=nil)
+      el << signature(cert) if sign?
     end
 
     def generated_reference_id
@@ -64,8 +64,8 @@ module SamlIdp
     end
     private :sign?
 
-    def signature
-      SignatureBuilder.new(signed_info_builder).raw
+    def signature(cert=nil)
+      SignatureBuilder.new(signed_info_builder, cert).raw
     end
     private :signature
 
