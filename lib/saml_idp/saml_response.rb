@@ -53,14 +53,6 @@ module SamlIdp
       @built ||= response_builder.encoded
     end
 
-    # def x509_certificate(cert)
-    #   cert || super
-    # end
-
-    # def secret_key(sec_key)
-    #   sec_key || super
-    # end
-
     def signed_assertion
       if encryption_opts
         assertion_builder.encrypt(sign: true)
