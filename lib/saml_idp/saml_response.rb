@@ -74,7 +74,7 @@ module SamlIdp
         authn_context_classref,
         expiry,
         encryption_opts,
-        session_expiry,
+        session_expiry
     end
     private :assertion_builder
   end
