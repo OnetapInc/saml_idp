@@ -41,8 +41,8 @@ module SamlIdp
       self.saml_request_id = saml_request_id
       self.saml_acs_url = saml_acs_url
       self.algorithm = algorithm
-      self.secret_key = sec_key || secret_key
-      self.x509_certificate = cert || x509_certificate
+      self.secret_key = sec_key || SamlIdp.config.secret_key
+      self.x509_certificate = cert || SamlIdp.config.x509_certificate
       self.authn_context_classref = authn_context_classref
       self.expiry = expiry
       self.encryption_opts = encryption_opts
