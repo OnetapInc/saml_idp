@@ -2,11 +2,9 @@ require 'builder'
 module SamlIdp
   class SignatureBuilder
     attr_accessor :signed_info_builder
-    attr_accessor :x509_certificate
 
-    def initialize(signed_info_builder, cert=nil)
+    def initialize(signed_info_builder)
       self.signed_info_builder = signed_info_builder
-      @x509_certificate = cert
     end
 
     def raw
@@ -23,7 +21,7 @@ module SamlIdp
     end
 
     def x509_certificate
-      (@x509_certificate || SamlIdp.config.x509_certificate)
+      SamlIdp.config.x509_certificate
       .to_s
       .gsub(/-----BEGIN CERTIFICATE-----/,"")
       .gsub(/-----END CERTIFICATE-----/,"")
