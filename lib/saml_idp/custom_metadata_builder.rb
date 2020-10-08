@@ -3,7 +3,7 @@ require 'saml_idp/attribute_decorator'
 require 'saml_idp/algorithmable'
 require 'saml_idp/signable'
 module SamlIdp
-  class MetadataBuilder
+  class CustomMetadataBuilder
     include Algorithmable
     include Signable
     attr_accessor :configurator
@@ -20,32 +20,12 @@ module SamlIdp
           "xmlns:saml" => Saml::XML::Namespaces::ASSERTION,
           "xmlns:ds" => Saml::XML::Namespaces::SIGNATURE,
           entityID: entity_id do |entity|
-            sign entity
-
-            entity.IDPSSODescriptor protocolSupportEnumeration: protocol_enumeration do |descriptor|
+            entity.IDPSSODescriptor WantAuthnRequestsSigned: false, protocolSupportEnumeration: protocol_enumeration do |descriptor|
               build_key_descriptor descriptor
-              descriptor.SingleLogoutService Binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST",
-                Location: single_logout_service_post_location
-              descriptor.SingleLogoutService Binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
-                Location: single_logout_service_redirect_location
               build_name_id_formats descriptor
               descriptor.SingleSignOnService Binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
                 Location: single_service_post_location
-              build_attribute descriptor
             end
-
-            entity.AttributeAuthorityDescriptor protocolSupportEnumeration: protocol_enumeration do |authority_descriptor|
-              build_key_descriptor authority_descriptor
-              build_organization authority_descriptor
-              build_contact authority_descriptor
-              authority_descriptor.AttributeService Binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
-                Location: attribute_service_location
-              build_name_id_formats authority_descriptor
-              build_attribute authority_descriptor
-            end
-
-            build_organization entity
-            build_contact entity
           end
       end
     end
