@@ -59,15 +59,12 @@ module SamlIdp
           "xmlns:saml" => Saml::XML::Namespaces::ASSERTION,
           "xmlns:ds" => Saml::XML::Namespaces::SIGNATURE,
           entityID: entity_id do |entity|
-            sign entity
-
             entity.IDPSSODescriptor WantAuthnRequestsSigned: false, protocolSupportEnumeration: protocol_enumeration do |descriptor|
               build_key_descriptor descriptor
               build_name_id_formats descriptor
               descriptor.SingleSignOnService Binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect",
                 Location: single_service_post_location
             end
-
           end
       end
     end
