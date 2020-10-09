@@ -15,8 +15,7 @@ module SamlIdp
     def fresh
       builder = Builder::XmlMarkup.new
       generated_reference_id do
-        builder.EntityDescriptor ID: reference_string,
-          xmlns: Saml::XML::Namespaces::METADATA,
+        builder.EntityDescriptor xmlns: Saml::XML::Namespaces::METADATA,
           "xmlns:saml" => Saml::XML::Namespaces::ASSERTION,
           "xmlns:ds" => Saml::XML::Namespaces::SIGNATURE,
           entityID: entity_id do |entity|
