@@ -29,9 +29,7 @@ module SamlIdp
           authn_context_classref,
           expiry=60*60,
           encryption_opts=nil,
-          session_expiry=0,
-          cert=nil,
-          sec_key=nil
+          session_expiry=0
           )
       self.reference_id = reference_id
       self.response_id = response_id
@@ -41,8 +39,6 @@ module SamlIdp
       self.saml_request_id = saml_request_id
       self.saml_acs_url = saml_acs_url
       self.algorithm = algorithm
-      self.secret_key = sec_key || secret_key
-      self.x509_certificate = cert || x509_certificate
       self.authn_context_classref = authn_context_classref
       self.expiry = expiry
       self.encryption_opts = encryption_opts
@@ -78,9 +74,7 @@ module SamlIdp
         authn_context_classref,
         expiry,
         encryption_opts,
-        session_expiry,
-        x509_certificate,
-        secret_key
+        session_expiry
     end
     private :assertion_builder
   end

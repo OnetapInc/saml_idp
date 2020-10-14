@@ -47,7 +47,7 @@ module SamlIdp
     end
 
     def decode_request(raw_saml_request)
-      @saml_request = Request.from_deflated_request(raw_saml_request)
+      @saml_request = Request.from_deflated_request(raw_saml_request.gsub(/\n/, ""))
     end
 
     def authn_context_classref
@@ -64,8 +64,6 @@ module SamlIdp
       expiry = opts[:expiry] || 60*60
       session_expiry = opts[:session_expiry]
       encryption_opts = opts[:encryption] || nil
-      certificate = opts[:certificate]
-      secret_key = opts[:secret_key]
 
       SamlResponse.new(
         reference_id,
@@ -79,9 +77,7 @@ module SamlIdp
         my_authn_context_classref,
         expiry,
         encryption_opts,
-        session_expiry,
-        certificate,
-        secret_key
+        session_expiry
       ).build
     end
 
