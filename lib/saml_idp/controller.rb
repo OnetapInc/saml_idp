@@ -101,6 +101,10 @@ module SamlIdp
       end
     end
 
+    def encode_idp_initiated_response(principal, opts = {})
+      encode_authn_response(principal, opts)
+    end
+
     def issuer_uri
       (SamlIdp.config.base_saml_location.present? && SamlIdp.config.base_saml_location) ||
         (defined?(request) && request.url.to_s.split("?").first) ||
