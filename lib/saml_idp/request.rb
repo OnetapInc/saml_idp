@@ -60,6 +60,9 @@ module SamlIdp
     end
 
     def acs_url
+      pp 'acs'
+      pp service_provider
+      pp service_provider.acs_url
       service_provider.acs_url ||
         authn_request["AssertionConsumerServiceURL"].to_s
     end
@@ -69,6 +72,8 @@ module SamlIdp
     end
 
     def response_url
+      pp 'response_url'
+      pp authn_request?
       if authn_request?
         acs_url
       elsif logout_request?
