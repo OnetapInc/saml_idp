@@ -116,8 +116,11 @@ module SamlIdp
         return false
       end
 
+      pp 'service_provider'
       pp service_provider
+      pp 'service_provider.acceptable_response_hosts'
       pp service_provider.acceptable_response_hosts
+      pp 'response_host'
       pp response_host
 
 
