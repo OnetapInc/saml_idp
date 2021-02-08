@@ -161,7 +161,14 @@ module SamlIdp
     end
 
     def response_host
+      pp 'response_host function'
+      pp 'response_url'
+      pp response_url
       uri = URI(response_url)
+      pp 'uri'
+      pp uri
+      pp 'uri.host'
+      pp uri.host
       if uri
         uri.host
       end
