@@ -108,6 +108,15 @@ module SamlIdp
         return false
       end
 
+      p 'service_provider?'
+      p service_provider?
+      p 'service_provider'
+      p service_provider
+      p 'service_provider.acceptable_response_hosts'
+      p service_provider.acceptable_response_hosts
+      p 'response_host'
+      p response_host
+
       if !service_provider.acceptable_response_hosts.include?(response_host)
         log "No acceptable AssertionConsumerServiceURL, either configure them via config.service_provider.response_hosts or match to your metadata_url host"
         return false
