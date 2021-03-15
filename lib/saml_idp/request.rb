@@ -60,6 +60,11 @@ module SamlIdp
     end
 
     def acs_url
+      pp 'acs_url'
+      pp authn_request["AssertionConsumerServiceURL"]
+      pp authn_request["AssertionConsumerServiceURL"].to_s
+      pp service_provider.acs_url
+
       if authn_request["AssertionConsumerServiceURL"]
         authn_request["AssertionConsumerServiceURL"].to_s
       else
@@ -72,6 +77,9 @@ module SamlIdp
     end
 
     def response_url
+      pp 'response_url'
+      pp authn_request?
+      
       if authn_request?
         acs_url
       elsif logout_request?
@@ -108,14 +116,14 @@ module SamlIdp
         return false
       end
 
-      p 'service_provider?'
-      p service_provider?
-      p 'service_provider'
-      p service_provider
-      p 'service_provider.acceptable_response_hosts'
-      p service_provider.acceptable_response_hosts
-      p 'response_host'
-      p response_host
+      pp 'service_provider?'
+      pp service_provider?
+      pp 'service_provider'
+      pp service_provider
+      pp 'service_provider.acceptable_response_hosts'
+      pp service_provider.acceptable_response_hosts
+      pp 'response_host'
+      pp response_host
 
       if !service_provider.acceptable_response_hosts.include?(response_host)
         log "No acceptable AssertionConsumerServiceURL, either configure them via config.service_provider.response_hosts or match to your metadata_url host"
