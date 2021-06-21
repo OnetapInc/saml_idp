@@ -112,7 +112,7 @@ module SamlIdp
 
       pp "response_url: #{response_url}"
       pp "service_provider?: #{service_provider?}"
-      pp "service_provider: #{service_provider}"
+      pp "service_provider: #{service_provider.to_h}"
       pp "service_provider.acceptable_response_hosts: #{service_provider.acceptable_response_hosts}"
       pp "response_host: #{response_host}"
 
