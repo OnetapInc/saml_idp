@@ -139,8 +139,8 @@ module SamlIdp
       pp "SamlIdp::Request#service_provider: #{issuer} -1"
       pp "SamlIdp::Request#service_provider: #{service_provider_finder} -2"
       pp "SamlIdp::Request#service_provider: #{service_provider_finder[issuer]} -3"
+      pp "SamlIdp::Request#service_provider: #{ServiceProvider.new((service_provider_finder[issuer] || {}).merge(identifier: issuer))} -4"
       @_service_provider ||= ServiceProvider.new((service_provider_finder[issuer] || {}).merge(identifier: issuer))
-      pp "SamlIdp::Request#service_provider: #{@_service_provider} -4"
     end
 
     def issuer
